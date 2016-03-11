@@ -5,7 +5,7 @@ This codebase enhances upon the original work with the following:
 ##Features
 1. **HTTP & HTTPS downloads work:** Working download for both protocols.  Refer to code examples below.
 
-2. **Windows Support:** Add official support for Windows 10 x64 and Windows 2012 R2 (32 + 64 bit) operating systems.
+2. **Windows Support:** Add official support for Windows 10 x64 and Windows Server 2012 R2 (32 + 64 bit) operating systems.
 
 3. **Multi threaded downloads:** In a conventional single threaded download you might experience poor performance due to network lags etc. So you don't completely utilize your bandwidth. With multi threads there is always one thread which is getting data thus minimizing the wait period between data packets.
 
@@ -18,7 +18,7 @@ This codebase enhances upon the original work with the following:
 The conventional npm installation process needs to be followed.
 
 ```bash
-$ npm install mt-downloader --save-dev
+$ npm install zeltice-mt-downloader --save-dev
 ```
 
 ##.mtd file
@@ -28,70 +28,69 @@ Once the download starts the library will create a file with a **.mtd** extensio
 When you want to start a new download you just need to provide a download url and a download path and call the ```start()``` method.
 
 ```javascript
-var mtd = require('mt-downloader');
+var url = require("url")
+var path = require("path")
+var mtd = require('zeltice-mt-downloader')
 
-var url = 'https://upload.wikimedia.org/wikipedia/commons/4/47/Gadget_the_pug_expressive_eyes.jpg';
-var file = '/Users/tusharmathur/Desktop/temp/Gadget_the_pug_expressive_eyes.jpg';
+var target_url = "https://upload.wikimedia.org/wikipedia/commons/4/47/Gadget_the_pug_expressive_eyes.jpg"
+var file_name = path.basename(url.parse(target_url).pathname)
+var file_path = path.join(__dirname, file_name)
 
-var downloader = new mtd(file, url);
+var downloader = new mtd(file_path, target_url)
 
-downloader.start();
+downloader.start()
 ```
-
-See it in action [here](https://github.com/tusharmath/Multi-threaded-downloader/blob/master/demo/NewDownload.js)
 
 ##Re-Downloads
 If you want to restart a download from where it left off. You just need to provide the path of the **.mtd** file.
 
 ```javascript
+var url = require("url")
+var path = require("path")
+var mtd = require('zeltice-mt-downloader')
 
-var mtd = require('mt-downloader');
+// File should have a .mtd extension
+var file_path = "/var/www/some_incomplete_download_file.zip.mtd"
 
-//File should have a .mtd extension
-var file = '/Users/tusharmathur/Desktop/temp/Gadget_the_pug_expressive_eyes.jpg.mtd';
+var downloader = new mtd(file_path)
 
-var downloader = new mtd(file);
-
-downloader.start();
+downloader.start()
 ```
-
-See it in action [here](https://github.com/tusharmath/Multi-threaded-downloader/blob/master/demo/ReDownload.js)
 
 ##Download Options
 A set of custom options can be sent to control the way a download is performed.
 
 ```javascript
 var options = {
-		    //To set the total number of download threads
-		    count: 2, //(Default: 6)
+  //To set the total number of download threads
+  count: 2, //(Default: 6)
 
-			//To set custom headers, such as cookies etc.
-		    headers: {cookies: 'abc=pqr;'},
+	//To set custom headers, such as cookies etc.
+  headers: {cookies: 'abc=pqr;'},
 
-		    //HTTP method
-		    method: 'GET', //(Default: GET)
+  //HTTP method
+  method: 'GET', //(Default: GET)
 
-		    //HTTP port
-		    port: 80, //(Default: 80)
+  //HTTP port
+  port: 80, //(Default: 80)
 
-		    //If no data is received the download times out. It is measured in seconds.
-		    timeout: 5, //(Default: 5 seconds)
+  //If no data is received the download times out. It is measured in seconds.
+  timeout: 5, //(Default: 5 seconds)
 
-		    //Control the part of file that needs to be downloaded.
-		    range: '0-100', //(Default: '0-100')
+  //Control the part of file that needs to be downloaded.
+  range: '0-100', //(Default: '0-100')
 
+  //Triggered when the download is started
+  onStart: function(meta) {
+    console.log('Download Started', meta);
+  },
 
-		    //Triggered when the download is started
-		    onStart: function(meta) {
-		        console.log('Download Started', meta);
-		    },
-
-		    //Triggered when the download is completed
-		    onEnd: function(err, result) {
-		        if (err) console.error(err);
-		        else console.log('Download Complete');
-		    }
-		};
+  //Triggered when the download is completed
+  onEnd: function(err, result) {
+    if (err) console.error(err);
+    else console.log('Download Complete');
+  }
+};
 ```
 
 ##*onStart* Callback
