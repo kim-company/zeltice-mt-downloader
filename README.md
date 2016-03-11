@@ -11,8 +11,6 @@ This codebase enhances upon the original work with the following:
 
 4. **Stop and start from the last downloaded byte:**. You don't have to worry about internet getting disconnected or your computer shutting down while downloading. You can quite easily start from the last byte that was downloaded.
 
-5. **Console application:** If you don't want to use it as a library and want to use it as an application instead we have a console application for you - [mt-console](https://github.com/tusharmath/mtd-console)
-
 ##Installation
 
 The conventional npm installation process needs to be followed.
