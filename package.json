@@ -1,0 +1,47 @@
+{
+  "name": "zeltice-mt-downloader",
+  "version": "1.0.0",
+  "description": "Multi-threaded, resumable, file download library for Nodejs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/test.*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeltice/zeltice-mt-downloader.git"
+  },
+  "keywords": [
+    "Node",
+    "Nodejs",
+    "file",
+    "download",
+    "resume",
+    "pause",
+    "resumable",
+    "pausable",
+    "multi",
+    "threaded",
+    "downloader"
+  ],
+  "author": "zeltice",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeltice/zeltice-mt-downloader/issues"
+  },
+  "homepage": "https://github.com/zeltice/zeltice-mt-downloader#readme",
+  "dependencies": {
+    "async": "0.2.x",
+    "underscore": "1.5.x"
+  },
+  "devDependencies": {
+    "grunt-release": "0.3.x",
+    "istanbul": "0.1.x",
+    "mocha": "1.12.x",
+    "mockery": "1.4.x",
+    "should": "1.2.x",
+    "sinon": "^1.14.1"
+  },
+}
