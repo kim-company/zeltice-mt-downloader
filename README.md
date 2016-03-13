@@ -1,15 +1,17 @@
-NOTE: This is an opinionated revision of the original mt-downloader [mt-downloader](https://github.com/tusharmath/Multi-threaded-downloader) code.
+NOTE: This is an opinionated revision of the original [mt-downloader](https://github.com/tusharmath/Multi-threaded-downloader) code.
 
 This codebase enhances upon the original work with the following:
 
 ##Features
 1. **HTTP & HTTPS downloads work:** Working download for both protocols.  Refer to code examples below.
 
-2. **Windows Support:** Add official support for Windows 10 x64 and Windows Server 2012 R2 (32 + 64 bit) operating systems.
+2. **Properly Downloads Redirecting URLs:** Sometimes URLs will redirect to another URL, for N times.  This library will follow redirects until it finds the source.
 
-3. **Multi threaded downloads:** In a conventional single threaded download you might experience poor performance due to network lags etc. So you don't completely utilize your bandwidth. With multi threads there is always one thread which is getting data thus minimizing the wait period between data packets.
+3. **Windows Support:** Add official support for Windows 10 x64 and Windows Server 2012 R2 (32 + 64 bit) operating systems.
 
-4. **Stop and start from the last downloaded byte:**. You don't have to worry about internet getting disconnected or your computer shutting down while downloading. You can quite easily start from the last byte that was downloaded.
+4. **Multi threaded downloads:** In a conventional single threaded download you might experience poor performance due to network lags etc. So you don't completely utilize your bandwidth. With multi threads there is always one thread which is getting data thus minimizing the wait period between data packets.
+
+5. **Stop and start from the last downloaded byte:**. You don't have to worry about internet getting disconnected or your computer shutting down while downloading. You can quite easily start from the last byte that was downloaded.
 
 ##Installation
 
@@ -61,7 +63,7 @@ A set of custom options can be sent to control the way a download is performed.
 ```javascript
 var options = {
   //To set the total number of download threads
-  count: 2, //(Default: 6)
+  count: 8, //(Default: 2)
 
 	//To set custom headers, such as cookies etc.
   headers: {cookies: 'abc=pqr;'},
@@ -103,7 +105,7 @@ The onStart method is called with some meta data. The main components are as fol
 4. **headers:** You can get all the http Headers of the download in case you want to use them. For instance, you might want to use the **Content-Disposition** header to get the name of the downloaded file.
 
 ##*threads* Meta
-The ```onStart``` callback return a **threads** object which stores all the information related to the download threads. This vital object is available of consumption for other libraries. With this object you can retrieve all kinds of information related to the download status of the file. A good example to see it in action is to see how [mt-console](https://github.com/tusharmath/mtd-console) uses it [here](https://github.com/tusharmath/mtd-console/blob/master/Analytics.js).
+The ```onStart``` callback return a **threads** object which stores all the information related to the download threads. This vital object is available of consumption for other libraries. With this object you can retrieve all kinds of information related to the download status of the file.
 
 Each thread has a **connection** key which shows its downloading status, namely -
 

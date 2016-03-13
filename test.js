@@ -3,20 +3,21 @@ var path = require("path")
 var mtd = require('./index.js')
 
 // Easy https
-var target_url = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+// var target_url = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
 
 // Https that has already been manually redirected
-var target_url = "https://upload.wikimedia.org/wikipedia/commons/4/47/Gadget_the_pug_expressive_eyes.jpg"
+// var target_url = "https://upload.wikimedia.org/wikipedia/commons/4/47/Gadget_the_pug_expressive_eyes.jpg"
 
 // Redirecting URL
 // TODO does not handle redirects
 // var target_url = "http://upload.wikimedia.org/wikipedia/commons/4/47/Gadget_the_pug_expressive_eyes.jpg"
 
 // Large video file, manually redirected
-// var target_url = "https://r6---sn-o097znek.googlevideo.com/videoplayback?requiressl=yes&id=bc5e466893bd8dfd&itag=22&source=webdrive&app=texmex&ip=73.66.2.110&ipbits=32&expire=1457653631&sparams=expire,id,ip,ipbits,itag,mm,mn,ms,mv,nh,pl,requiressl,source&signature=0A46BEC939C8C38B9173A9BEFEDF822F6E46256F.1038A82EC7EBF8B87D975E5C49FE4A00BC026A6B&key=cms1&pl=16&cms_redirect=yes&mm=31&mn=sn-o097znek&ms=au&mt=1457641728&mv=m&nh=IgpwcjA0LnNqYzA3KgkxMjcuMC4wLjE"
+// this actually redirects to a similar url
+// var target_url = "https://r6---sn-q4f7sn7s.googlevideo.com/videoplayback?requiressl=yes&id=f87d9f67f9ed98d8&itag=22&source=webdrive&app=texmex&ip=2001:4800:7821:105:be76:4eff:fe06:850e&ipbits=32&expire=1457840198&sparams=expire,id,ip,ipbits,itag,mm,mn,ms,mv,nh,pl,requiressl,source&signature=36295210A631AE6168D0A0841C6F2C32033713B5.74BD563372CE0E5D38080993A7EDCED70766B29A&key=cms1&pl=48&redirect_counter=1&req_id=186d22265b8da3ee&cms_redirect=yes&mm=30&mn=sn-q4f7sn7s&ms=nxu&mt=1457831954&mv=u&nh=IgpwcjAxLmRmdzA2KgkxMjcuMC4wLjE"
 
 // The real world URL that would be used often.
-// var target_url = "https://redirector.googlevideo.com/videoplayback?requiressl=yes&id=bc5e466893bd8dfd&itag=22&source=webdrive&app=texmex&ip=2001:19f0:6000:9ad4:5400:ff:fe20:66ec&ipbits=32&expire=1457653631&sparams=requiressl,id,itag,source,ip,ipbits,expire&signature=54B4128F7DEE869B5F9634F4324381615E2EE5F8.82BFEF3C6413E546CE110BC02682DED8C25FD3D8&key=ck2&mm=30&mn=sn-a5m7ln7y&ms=nxu&mt=1457638426&mv=u&nh=IgpwcjAxLmxheDAyKgkxMjcuMC4wLjE&pl=38"
+var target_url = "https://redirector.googlevideo.com/videoplayback?requiressl=yes&id=a59ef6254f60f8c8&itag=18&source=webdrive&app=texmex&ip=2001:19f0:6000:9ad4:5400:ff:fe20:66ec&ipbits=32&expire=1457845541&sparams=requiressl,id,itag,source,ip,ipbits,expire&signature=86BEBB382120D560E2620F3FB7D7F1FA8AA4AECF.2A790E168B3A74B849C54B5EBFDC57A8E9B3E7AD&key=ck2&mm=30&mn=sn-a5m7ln76&ms=nxu&mt=1457830977&mv=u&nh=IgpwcjAxLmxheDAyKgkxMjcuMC4wLjE&pl=38"
 
 var file_name = path.basename(url.parse(target_url).pathname)
 // console.log('file_name:', file_name)
@@ -24,6 +25,7 @@ var file_name = path.basename(url.parse(target_url).pathname)
 var file_path = path.join(__dirname, file_name)
 
 var options = {
+  count: 8,
   onEnd: (err) => {
     if (err)
       console.log("Ended with error:", err)
